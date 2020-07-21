@@ -1,0 +1,45 @@
+.background {
+	-fx-background-color: #303D61;
+}
+
+.text-area {
+    -fx-background-color: #e3e4e9;
+    -fx-background-radius: 15;
+	-fx-border-radius: 15;
+	-fx-border-color: black;
+}
+
+.text-area .scroll-pane {
+    -fx-background-color: transparent;
+}
+.text-area .scroll-pane .viewport{
+    -fx-background-color: transparent;
+}
+.text-area .scroll-pane .content{
+    -fx-background-color: transparent;
+}
+
+.input-area {
+	-fx-background-color: #e3e4e9;
+    -fx-background-radius: 10;
+	-fx-border-radius: 10;
+	-fx-border-color: black;	
+}
+
+.input-area .scroll-pane {
+    -fx-background-color: transparent;
+}
+.input-area  .scroll-pane .viewport{
+    -fx-background-color: transparent;
+}
+.input-area  .scroll-pane .content{
+    -fx-background-color: transparent;
+}
+
+.button {
+	-fx-background-color: transparent;
+	-fx-background-image: url('icons/send.png') 100% 100% no-repeat;
+	-fx-background-size: cover;
+	-fx-background-position: center;
+}
+
