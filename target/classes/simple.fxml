@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
@@ -21,16 +21,17 @@
             <Cursor fx:constant="TEXT" />
          </cursor>
       </TextField>
-     <!-- <Pane layoutX="8.0" layoutY="11.0" prefHeight="38.0" prefWidth="600.0" style="-fx-background-color: r;">
+      <Pane layoutX="6.0" layoutY="2.0" prefHeight="39.0" prefWidth="588.0">
          <children>
-            <FontAwesomeIcon glyphName="MINUS" layoutX="512.0" layoutY="27.0" size="2em" textAlignment="CENTER" />
-            <FontAwesomeIcon glyphName="CLOSE" layoutX="557.0" layoutY="26.0" size="2em" />
-            <Label layoutX="14.0" layoutY="-5.0" opacity="0.5" text="PedoChat" textFill="#d0c9c9">
+            <FontAwesomeIconView glyphName="MINUS" layoutX="513.0" layoutY="33.0" size="25.0" />
+            <FontAwesomeIconView glyphName="CLOSE" layoutX="554.0" layoutY="30.0" size="25.0" />
+            <Label layoutX="22.0" layoutY="2.0" opacity="0.8" text="PedoChat">
                <font>
                   <Font name="Comic Sans MS Bold Italic" size="27.0" />
                </font>
             </Label>
-         </children></Pane>
-      <FontAwesomeIcon glyphName="SEND" layoutX="536.0" layoutY="401.0" size="3em" /> -->
+         </children>
+      </Pane>
+      <FontAwesomeIconView glyphName="SEND" layoutX="536.0" layoutY="399.0" size="30.0" />
    </children>
 </AnchorPane>
