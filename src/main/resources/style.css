@@ -36,10 +36,3 @@
     -fx-background-color: transparent;
 }
 
-.button {
-	-fx-background-color: transparent;
-	-fx-background-image: url('icons/send.png') 100% 100% no-repeat;
-	-fx-background-size: cover;
-	-fx-background-position: center;
-}
-
