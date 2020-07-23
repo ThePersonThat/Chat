@@ -5,6 +5,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
+import javafx.stage.StageStyle;
 
 /**
  * JavaFX App
@@ -19,6 +20,7 @@ public class App extends Application {
 
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
+        primaryStage.initStyle(StageStyle.TRANSPARENT);
         primaryStage.show();
     }
 

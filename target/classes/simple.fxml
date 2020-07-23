@@ -5,33 +5,62 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="436.0" prefWidth="600.0" styleClass="background" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.Controller">
    <children>
-      <TextArea fx:id="Output" layoutX="15.0" layoutY="49.0" prefHeight="311.0" prefWidth="571.0" styleClass="background" stylesheets="@style.css" wrapText="true">
+      <TextArea fx:id="output" layoutX="15.0" layoutY="49.0" prefHeight="311.0" prefWidth="571.0" styleClass="background" stylesheets="@style.css" wrapText="true">
          <font>
             <Font size="19.0" />
          </font>
+         <effect>
+            <InnerShadow blurType="TWO_PASS_BOX" choke="0.2" height="15.0" radius="7.0" width="15.0" />
+         </effect>
       </TextArea>
-      <TextField fx:id="Input" layoutX="15.0" layoutY="373.0" prefHeight="32.0" prefWidth="504.0" styleClass="input-area" stylesheets="@style.css">
+      <TextField fx:id="input" layoutX="15.0" layoutY="373.0" onKeyPressed="#checkKey" prefHeight="39.0" prefWidth="513.0" styleClass="input-area" stylesheets="@style.css">
          <cursor>
             <Cursor fx:constant="TEXT" />
          </cursor>
+         <font>
+            <Font size="16.0" />
+         </font>
+         <effect>
+            <InnerShadow blurType="TWO_PASS_BOX" height="10.0" radius="4.5" width="10.0" />
+         </effect>
       </TextField>
-      <Pane layoutX="6.0" layoutY="2.0" prefHeight="39.0" prefWidth="588.0">
+      <Pane layoutX="6.0" layoutY="2.0" onMouseDragged="#dragged" onMousePressed="#pressed" prefHeight="39.0" prefWidth="588.0">
          <children>
-            <FontAwesomeIconView glyphName="MINUS" layoutX="513.0" layoutY="33.0" size="25.0" />
-            <FontAwesomeIconView glyphName="CLOSE" layoutX="554.0" layoutY="30.0" size="25.0" />
-            <Label layoutX="22.0" layoutY="2.0" opacity="0.8" text="PedoChat">
+            <Label layoutX="22.0" layoutY="2.0" opacity="0.83" text="PedoChat" textFill="#0000009a">
                <font>
                   <Font name="Comic Sans MS Bold Italic" size="27.0" />
                </font>
             </Label>
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="544.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="28.0" prefWidth="30.0" styleClass="close-btn" stylesheets="@style.css">
+               <graphic>
+                  <FontAwesomeIconView glyphName="CLOSE" onMouseClicked="#CloseApp" selectionEnd="0" size="25.0" styleClass="close-btn">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </FontAwesomeIconView>
+               </graphic>
+            </Label>
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="514.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="30.0" styleClass="min-btn" stylesheets="@style.css">
+               <graphic>
+                  <FontAwesomeIconView glyphName="MINUS" onMouseClicked="#MinStage" size="25.0">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </FontAwesomeIconView>
+               </graphic>
+            </Label>
          </children>
       </Pane>
-      <FontAwesomeIconView glyphName="SEND" layoutX="536.0" layoutY="399.0" size="30.0" />
+      <FontAwesomeIconView glyphName="SEND" layoutX="541.0" layoutY="403.0" onMouseClicked="#SendMessage" size="30.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></FontAwesomeIconView>
    </children>
 </AnchorPane>
