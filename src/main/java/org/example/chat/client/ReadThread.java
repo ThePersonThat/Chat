@@ -10,12 +10,12 @@ import java.net.Socket;
 public class ReadThread extends Thread{
     private BufferedReader reader;
     private Socket socket;
-    private ChatClient client;
+    private Client client;
 
-    public ReadThread(Socket socket, ChatClient client) {
+    public ReadThread(Socket socket, Client client) {
         this.socket = socket;
         this.client = client;
-
+        ClientProgramStatus.program.setReadThread(this);
         try {
             reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         } catch (IOException ex) {
@@ -27,7 +27,8 @@ public class ReadThread extends Thread{
     @Override
     public void run() {
         Controller controller = client.getController();
-        while(true) {
+
+        while (true) {
             try {
                 String response = reader.readLine();
                 controller.setMessage(response);

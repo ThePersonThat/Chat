@@ -6,7 +6,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.StageStyle;
-import org.example.chat.client.ChatClient;
+import org.example.chat.client.Client;
 
 /**
  * JavaFX App
@@ -23,9 +23,8 @@ public class App extends Application {
         primaryStage.setScene(scene);
         primaryStage.initStyle(StageStyle.TRANSPARENT);
         primaryStage.show();
-        ChatClient.run(loader.getController());
+        Client.run(loader.getController());
     }
-
 
     public static void main(String[] args) {
         launch(args);

@@ -11,12 +11,12 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import org.example.chat.client.ClientProgramStatus;
+
 
 public class Controller {
-
     private volatile boolean login = false;
     private volatile boolean message = false;
-    private volatile boolean isRunning = true;
 
     public ResourceBundle resources;
 
@@ -29,26 +29,19 @@ public class Controller {
     private double x, y;
 
     public void CloseApp(MouseEvent event) {
-        shutDown();
-    }
+        ClientProgramStatus.program.setRunning(false);
 
-    public void exit() {
-        shutDown();
-    }
-
-    private void shutDown() {
-        isRunning = false;
         try {
-            Thread.sleep(2000);
-        } catch (InterruptedException ignored) {}
+            ClientProgramStatus.program.getWriteTread().join();
+            ClientProgramStatus.program.getReadThread().interrupt();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
         Platform.exit();
         System.exit(0);
     }
 
-    public boolean isRunning() {
-        return isRunning;
-    }
 
     public void pressed(MouseEvent event) {
         x = event.getSceneX();
@@ -91,16 +84,14 @@ public class Controller {
     }
 
     public String waitMessage() {
-        while (!message && isRunning) {
+        while (!message && ClientProgramStatus.program.isRunning()) {
             Thread.onSpinWait();
         }
 
-        if(isRunning) {
-            String msg = input.getText();
-            input.clear();
-            message = false;
-            return msg;
-        } else return "Disconnect";
+        String msg = input.getText();
+        input.clear();
+        message = false;
+        return msg;
     }
 
     public void setMessage(String msg) {

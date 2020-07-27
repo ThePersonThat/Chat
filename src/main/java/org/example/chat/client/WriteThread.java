@@ -1,20 +1,21 @@
 package org.example.chat.client;
+
 import org.example.Controller;
 
-import java.io.*;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.Socket;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 public class WriteThread extends Thread {
     private PrintWriter writer;
     private Socket socket;
-    private ChatClient client;
+    private Client client;
 
-    public WriteThread(Socket socket, ChatClient client) {
+    public WriteThread (Socket socket, Client client) {
         this.socket = socket;
         this.client = client;
 
+        ClientProgramStatus.program.setWriteTread(this);
         try {
             writer = new PrintWriter(socket.getOutputStream(), true);
         } catch (IOException ex) {
@@ -27,22 +28,28 @@ public class WriteThread extends Thread {
     public void run() {
         Controller controller = client.getController();
         String userName = controller.inputLogin();
-        client.setUserName(userName);
         writer.println(userName);
 
-        String text;
+
+        String message;
 
         do {
-            text = controller.waitMessage();
-            writer.println(text);
+            message = controller.waitMessage();
 
-        } while (!text.equals("Disconnect"));
+            if(ClientProgramStatus.program.isRunning())
+                writer.println(message);
+            else
+                break;
+
+        } while (true);
+
+        writer.println("server-command: disconnect");
 
         try {
             socket.close();
-            controller.exit();
         } catch (IOException ex) {
             System.out.println("Error writing to server: " + ex.getMessage());
         }
     }
+
 }
