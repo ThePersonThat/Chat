@@ -11,8 +11,12 @@ import java.util.Set;
 public class Server {
     private Set<ClientSocket> clients = new HashSet<>();
     private ServerSocket serverSocket;
+    private StoryMessage history;
     private int port;
 
+    public StoryMessage getHistory() {
+        return history;
+    }
 
     public Server (int port) {
         this.port = port;
@@ -43,6 +47,7 @@ public class Server {
     private void run() {
         try (ServerSocket serverSocket = new ServerSocket(port)) {
             this.serverSocket = serverSocket;
+            history = new StoryMessage();
             LOG("Server is start on port: " + this.port);
 
             while (true) {

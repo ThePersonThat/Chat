@@ -1,0 +1,18 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="com.TestChat:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/com_TestChat_jar</output-path>
+    <root id="archive" name="com.TestChat.jar">
+      <element id="module-output" name="com.TestChat" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/src/main/libs/fontawesomefx-commons-11.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/openjfx/javafx-fxml/14/javafx-fxml-14.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/openjfx/javafx-fxml/14/javafx-fxml-14-win.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/openjfx/javafx-graphics/14/javafx-graphics-14-win.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/openjfx/javafx-controls/14/javafx-controls-14.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/src/main/libs/fontawesomefx-fontawesome-4.7.0-11.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/openjfx/javafx-graphics/14/javafx-graphics-14.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/openjfx/javafx-base/14/javafx-base-14-win.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/openjfx/javafx-controls/14/javafx-controls-14-win.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/openjfx/javafx-base/14/javafx-base-14.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

@@ -3,6 +3,8 @@ package org.example.chat.client;
 
 import org.example.Controller;
 import java.io.IOException;
+import java.net.Inet4Address;
+import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
@@ -22,9 +24,11 @@ public class Client {
     }
 
     public static void run(Controller controller) {
-        Client client = new Client("localhost", 4004, controller);
+        try {
+            Client client = new Client("0.tcp.ngrok.io", 19971, controller);
 
-        client.execute();
+            client.execute();
+        } catch (Exception ignored) {}
     }
 
 

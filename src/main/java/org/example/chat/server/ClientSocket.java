@@ -69,6 +69,10 @@ public class ClientSocket extends Thread {
             userName = reader.readLine();
             server.sendMessage("New user connected: " + userName);
 
+            if(server.getHistory().getSizeHistory() != 0) {
+                sendMessage(server.getHistory().printHistory());
+            }
+
             DateTimeFormatter format = DateTimeFormatter.ofPattern("HH:mm");
             String message;
 
@@ -81,6 +85,7 @@ public class ClientSocket extends Thread {
 
                 } else {
                     message = userName + ": " + message.trim() + " (" + format.format(LocalDateTime.now()) + ")";
+                    server.getHistory().addMessage(message);
                     server.sendMessage(message);
                 }
             } while (true);
