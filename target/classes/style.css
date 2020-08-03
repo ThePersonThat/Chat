@@ -90,4 +90,12 @@
     -fx-background-color: #15224b;
 }
 
+.btn-connect {
+    -fx-background-color: silver;
+}
+
+.btn-connect:hover {
+    -fx-text-fill: #002fff;
+}
+
 

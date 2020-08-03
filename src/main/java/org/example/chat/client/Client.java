@@ -9,13 +9,11 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 
 public class Client {
-    private String hostname;
-    private int port;
     private Controller controller;
+    private Socket socket;
 
-    public Client(String hostname, int port, Controller controller) {
-        this.hostname = hostname;
-        this.port = port;
+    public Client(Socket socket, Controller controller) {
+        this.socket = socket;
         this.controller = controller;
     }
 
@@ -23,9 +21,9 @@ public class Client {
         return controller;
     }
 
-    public static void run(Controller controller) {
+    public static void run(Controller controller, Socket socket) {
         try {
-            Client client = new Client("0.tcp.ngrok.io", 19971, controller);
+            Client client = new Client(socket, controller);
 
             client.execute();
         } catch (Exception ignored) {}
@@ -34,16 +32,9 @@ public class Client {
 
 
     private void execute() {
-        try {
-            Socket socket = new Socket(hostname, port);
-            System.out.println("Connected to the server");
+        System.out.println("Connected to the server");
 
-            new ReadThread(socket, this).start();
-            new WriteThread(socket, this).start();
-        } catch (UnknownHostException ex) {
-            System.out.println("Server not found: " + ex.getMessage());
-        } catch (IOException ex) {
-            System.out.println("I/O Error: " + ex.getMessage());
-        }
+        new ReadThread(socket, this).start();
+        new WriteThread(socket, this).start();
     }
 }

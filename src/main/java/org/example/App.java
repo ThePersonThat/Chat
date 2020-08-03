@@ -14,16 +14,16 @@ import org.example.chat.client.Client;
 public class App extends Application {
 
     @Override
-    public void start(Stage primaryStage) throws Exception{
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/chat.fxml"));
+    public void start(Stage primaryStage) throws Exception {
 
-        Parent root = loader.load();
+        FXMLLoader loaderConnect = new FXMLLoader(getClass().getResource("/connect.fxml"));
+
+        Parent root = loaderConnect.load();
 
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
         primaryStage.initStyle(StageStyle.TRANSPARENT);
         primaryStage.show();
-        Client.run(loader.getController());
     }
 
     public static void main(String[] args) {
