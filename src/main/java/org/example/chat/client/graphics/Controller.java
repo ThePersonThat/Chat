@@ -33,7 +33,6 @@ enum TypeMessage {
     IMAGE, TEXT
 }
 
-
 public class Controller {
 
     private volatile Message message;
