@@ -1,6 +1,8 @@
 package org.example.chat.server;
 
 
+import org.example.chat.client.Message;
+
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.ServerSocket;
@@ -72,11 +74,14 @@ public class Server {
         server.run();
     }
 
-    public void sendMessage(String msg) {
+    public void sendMessage(Message message, ClientSocket sender) {
         for (ClientSocket client: clients) {
-            client.sendMessage(msg);
+            if(client != sender) {
+                client.sendMessage(message);
+            }
         }
     }
+
 
     public void removeUser(ClientSocket client) {
         clients.remove(client);

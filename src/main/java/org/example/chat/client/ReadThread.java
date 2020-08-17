@@ -1,41 +1,48 @@
 package org.example.chat.client;
 
-import org.example.Controller;
+import javafx.application.Platform;
+import org.example.chat.client.graphics.Controller;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.Socket;
 
 public class ReadThread extends Thread{
-    private BufferedReader reader;
     private Socket socket;
     private Client client;
+    private ObjectInputStream in;
 
     public ReadThread(Socket socket, Client client) {
         this.socket = socket;
         this.client = client;
+
         ClientProgramStatus.program.setReadThread(this);
-        try {
-            reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-        } catch (IOException ex) {
-            System.out.println("Error getting input stream: " + ex.getMessage());
-            ex.printStackTrace();
-        }
     }
 
     @Override
     public void run() {
+        try {
+            in = new ObjectInputStream(socket.getInputStream());
+        } catch (IOException ex) {
+            System.out.println("Error getting input stream: " + ex.getMessage());
+            ex.printStackTrace();
+        }
+
         Controller controller = client.getController();
 
         while (true) {
             try {
-                String response = reader.readLine();
-                controller.setMessage(response);
-            } catch (IOException ex) {
-                System.out.println("Error reading from server: " + ex.getMessage());
-                ex.printStackTrace();
-                break;
+                Message message = (Message) in.readObject();
+                Platform.runLater(() -> controller.setMessageOther(message));
+
+            } catch (IOException | ClassNotFoundException exception) {
+                exception.printStackTrace();
+                try {
+                    in.close();
+                    break;
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
             }
         }
     }

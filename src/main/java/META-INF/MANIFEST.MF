@@ -1,3 +1,3 @@
 Manifest-Version: 1.0
-Main-Class: org.example.App
+Main-Class: org.example.chat.client.graphics.app.App
 

@@ -1,4 +1,4 @@
-package org.example;
+package org.example.chat.client.graphics.app;
 
 import javafx.application.Application;
 import javafx.scene.Parent;
@@ -6,7 +6,6 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.StageStyle;
-import org.example.chat.client.Client;
 
 /**
  * JavaFX App

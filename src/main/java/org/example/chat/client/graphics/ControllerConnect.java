@@ -1,4 +1,4 @@
-package org.example;
+package org.example.chat.client.graphics;
 
 import java.io.IOException;
 import java.net.Socket;
@@ -76,7 +76,7 @@ public class ControllerConnect {
             loadChat(socket);
         } catch (NumberFormatException ex) {
             alert.setHeaderText(null);
-            alert.setContentText("Port can't have numbers");
+            alert.setContentText("Port only can have numbers");
 
             alert.showAndWait();
         } catch (UnknownHostException ex) {

@@ -20,7 +20,12 @@
             <artifactId>javafx-fxml</artifactId>
             <version>14</version>
         </dependency>
-
+        <dependency>
+            <groupId>com.gluonhq.attach</groupId>
+            <artifactId>util</artifactId>
+            <version>4.0.7</version>
+            <scope>runtime</scope>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
@@ -37,7 +42,7 @@
                 <artifactId>javafx-maven-plugin</artifactId>
                 <version>0.0.1</version>
                 <configuration>
-                    <mainClass>org.example.App</mainClass>
+                    <mainClass>org.example.chat.client.graphics.app.App</mainClass>
                 </configuration>
             </plugin>
         </plugins>

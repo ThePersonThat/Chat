@@ -1,4 +1,4 @@
-package org.example;
+package org.example.chat.client.graphics.app;
 
 public class SystemInfo {
 

@@ -1,12 +1,8 @@
 package org.example.chat.client;
 
 
-import org.example.Controller;
-import java.io.IOException;
-import java.net.Inet4Address;
-import java.net.InetSocketAddress;
+import org.example.chat.client.graphics.Controller;
 import java.net.Socket;
-import java.net.UnknownHostException;
 
 public class Client {
     private Controller controller;
