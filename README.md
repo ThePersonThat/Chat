@@ -12,5 +12,5 @@ This is a chat that is written in Java (Sockets). It use TCP connection.
 
 ## Date 
 
-Last updated 03.08.2020
+Last updated 03.08.2020  
 Last updated 19.08.2020
