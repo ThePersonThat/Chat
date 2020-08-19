@@ -1,56 +1,42 @@
 package org.example.chat.client.graphics;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ResourceBundle;
 
-import com.gluonhq.charm.glisten.control.Avatar;
 import javafx.application.Platform;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.TextAlignment;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import org.example.chat.client.Message;
-import org.example.chat.client.MessageImage;
-import org.example.chat.client.MessageText;
+import org.example.chat.client.message.*;
 
-// TODO: 1) scroll bar on hover;
-// TODO: 2) Correct displaying time, sendMessageSelf
+// TODO: 1) Scroll bar on hover;
+// TODO: 2) Correct displaying time, sendMessageSelf;
+// TODO: 3) It might be better if change label with image;
+// TODO: 4) Proportional size of image;
+// TODO: 5) Add storage to a server;
 
-
-enum TypeMessage {
-    IMAGE, TEXT
-}
 
 public class Controller {
 
     private volatile Message message;
-
     private volatile boolean isSendMessage = false;
-
-    public ResourceBundle resources;
-
-    public URL location;
-
-    public TextField input;
-
-    public VBox chatBox;
-
-    public ScrollPane scrollPane;
-
     private double x, y;
 
+    public ResourceBundle resources;
+    public URL location;
+    public TextField input;
+    public VBox chatBox;
+    public ScrollPane scrollPane;
+    public VBox vboxChooser;
 
     public void setMessageSelf(Message message) {
         ChatLayout.setLayoutMessage(message, chatBox, true);
@@ -60,26 +46,15 @@ public class Controller {
         ChatLayout.setLayoutMessage(message, chatBox, false);
     }
 
-
     public void initialize() {
         scrollPane.vvalueProperty().bind(chatBox.heightProperty());
     }
 
 
     public void CloseApp(MouseEvent event) {
-        /*ClientProgramStatus.program.setRunning(false);
-
-        try {
-            ClientProgramStatus.program.getWriteTread().join();
-            ClientProgramStatus.program.getReadThread().interrupt();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
         Platform.exit();
-        System.exit(0);*/
+        System.exit(0);
     }
-
 
     public void pressed(MouseEvent event) {
         x = event.getSceneX();
@@ -107,21 +82,6 @@ public class Controller {
             Thread.onSpinWait();
         }
 
-
-        if(message instanceof MessageText) {
-            String msg = input.getText();
-            input.clear();
-            message.setContent(msg.getBytes());
-        } else if(message instanceof MessageImage) {
-
-            try {
-                byte[] array = Files.readAllBytes(Paths.get("C:\\Users\\Alex\\IdeaProjects\\com.TestChat\\src\\main\\resources\\cat.jpg"));
-                message.setContent(array);
-            } catch (IOException exception) {
-                exception.printStackTrace();
-            }
-        }
-
         Platform.runLater(() -> setMessageSelf(message));
         isSendMessage = false;
         return message;
@@ -131,15 +91,81 @@ public class Controller {
         send(TypeMessage.TEXT);
     }
 
+    public void sendFile(MouseEvent event) {
+
+        vboxChooser.setVisible(true);
+    }
+
+    public void mouseExit(MouseEvent event) {
+        vboxChooser.setVisible(false);
+    }
+
+
+    public void sendFileMessage(MouseEvent event) {
+        send(TypeMessage.FILE);
+    }
+
     public void sendImage(MouseEvent event) {
         send(TypeMessage.IMAGE);
     }
 
     private void send(TypeMessage type) {
-        if(type == TypeMessage.TEXT) {
-            message = new MessageText();
-        } else if(type == TypeMessage.IMAGE) {
-            message = new MessageImage();
+        switch (type) {
+            case TEXT: {
+                if (input.getText().isEmpty())
+                    return;
+
+                message = new MessageText();
+                String msg = input.getText();
+                input.clear();
+                message.setContent(msg.getBytes());
+                break;
+            }
+            case IMAGE: {
+                FileChooser chooser = new FileChooser();
+                chooser.setTitle("Select image");
+                chooser.getExtensionFilters().addAll(
+                        new FileChooser.ExtensionFilter("jpg images", "*.jpg"),
+                        new FileChooser.ExtensionFilter("png images", "*.png")
+                );
+
+                File file = chooser.showOpenDialog(chatBox.getScene().getWindow());
+
+                if (file == null) {
+                    return;
+                }
+
+                try {
+                    message = new MessageImage();
+                    byte[] array = Files.readAllBytes(file.toPath());
+                    message.setContent(array);
+                } catch (IOException exception) {
+                    exception.printStackTrace();
+                }
+
+                break;
+            }
+            case FILE: {
+                FileChooser chooser = new FileChooser();
+                chooser.setTitle("Select file");
+                chooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Any files", "*.*"));
+                File file = chooser.showOpenDialog(chatBox.getScene().getWindow());
+
+                if(file == null) {
+                    return;
+                }
+
+                try {
+                    message = new MessageFile();
+                    byte[] array = Files.readAllBytes(file.toPath());
+                    ((MessageFile)message).setNameFile(file.getName());
+                    message.setContent(array);
+                } catch (IOException exception) {
+                    exception.printStackTrace();
+                }
+
+                break;
+            }
         }
 
         isSendMessage = true;

@@ -2,6 +2,7 @@ package org.example.chat.client;
 
 import javafx.application.Platform;
 import org.example.chat.client.graphics.Controller;
+import org.example.chat.client.message.Message;
 
 import java.io.*;
 import java.net.Socket;
@@ -14,8 +15,6 @@ public class ReadThread extends Thread{
     public ReadThread(Socket socket, Client client) {
         this.socket = socket;
         this.client = client;
-
-        ClientProgramStatus.program.setReadThread(this);
     }
 
     @Override
@@ -42,7 +41,6 @@ public class ReadThread extends Thread{
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-
             }
         }
     }

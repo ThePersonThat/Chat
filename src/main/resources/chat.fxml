@@ -71,6 +71,29 @@
             </VBox>
          </content>
       </ScrollPane>
-      <FontAwesomeIconView glyphName="PAPERCLIP" layoutX="29.0" layoutY="602.0" onMouseClicked="#sendImage" size="30" />
+      <FontAwesomeIconView glyphName="PAPERCLIP" layoutX="29.0" layoutY="602.0" onMouseClicked="#sendFile" size="30">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></FontAwesomeIconView>
+      <VBox fx:id="vboxChooser" layoutX="53.0" layoutY="512.0" onMouseExited="#mouseExit" prefHeight="96.0" prefWidth="168.0" styleClass="vbox-choose" stylesheets="@style.css" visible="false">
+         <children>
+            <Label alignment="CENTER" contentDisplay="CENTER" onMouseClicked="#sendImage" prefHeight="48.0" prefWidth="169.0" styleClass="vbox-chose-label" stylesheets="@style.css" text="Image" textAlignment="CENTER">
+               <font>
+                  <Font name="Cambria" size="22.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Label>
+            <Label alignment="CENTER" contentDisplay="CENTER" onMouseClicked="#sendFileMessage" prefHeight="48.0" prefWidth="168.0" style="-fx-border-radius: 0 0 10 10; -fx-background-radius: 0 0 10 10;" styleClass="vbox-chose-label" stylesheets="@style.css" text="File" textAlignment="CENTER">
+               <font>
+                  <Font name="Cambria" size="22.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Label>
+         </children>
+      </VBox>
    </children>
 </AnchorPane>

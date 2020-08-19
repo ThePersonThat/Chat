@@ -1,12 +1,9 @@
 package org.example.chat.server;
 
-import org.example.chat.client.Message;
+import org.example.chat.client.message.Message;
 
 import java.io.*;
 import java.net.Socket;
-
-
-// TODO: if you will have time correct the bug when the user write server-command: disconnect
 
 
 public class ClientSocket extends Thread {

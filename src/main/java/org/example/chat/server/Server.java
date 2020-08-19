@@ -1,7 +1,7 @@
 package org.example.chat.server;
 
 
-import org.example.chat.client.Message;
+import org.example.chat.client.message.Message;
 
 import java.io.IOException;
 import java.net.InetAddress;

@@ -1,6 +1,7 @@
 package org.example.chat.client;
 
 import org.example.chat.client.graphics.Controller;
+import org.example.chat.client.message.Message;
 
 import java.io.IOException;
 import java.io.ObjectOutputStream;
@@ -14,7 +15,6 @@ public class WriteThread extends Thread {
     public WriteThread (Socket socket, Client client) {
         this.socket = socket;
         this.client = client;
-        ClientProgramStatus.program.setWriteTread(this);
 
         try {
             out = new ObjectOutputStream(socket.getOutputStream());
@@ -30,15 +30,19 @@ public class WriteThread extends Thread {
         Message message;
 
         try {
-            while (ClientProgramStatus.program.isRunning()) {
+            while (true) {
                 message = controller.waitMessage();
 
                 out.writeObject(message);
             }
-
-            //out.close();
         } catch (IOException exception) {
             exception.printStackTrace();
+        } finally {
+            try {
+                out.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 }

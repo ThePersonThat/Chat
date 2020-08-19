@@ -6,7 +6,7 @@ import java.net.URL;
 import java.net.UnknownHostException;
 import java.util.ResourceBundle;
 
-import javafx.application.Platform;
+import javafx.application.HostServices;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -17,6 +17,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import org.example.chat.client.Client;
+import org.example.chat.client.graphics.app.App;
 
 public class ControllerConnect {
 
@@ -34,10 +35,8 @@ public class ControllerConnect {
 
 
     public void CloseApp(MouseEvent event) {
-        Platform.exit();
-        System.exit(0);
+        App.closeApp();
     }
-
 
     public void MinStage(MouseEvent event) {
         ((Stage) ((Node) event.getSource()).getScene().getWindow()).setIconified(true);
@@ -45,10 +44,11 @@ public class ControllerConnect {
 
     private void loadChat(Socket socket) throws Exception {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/chat.fxml"));
-
         Parent root = loader.load();
+
         Scene scene = new Scene(root);
         Stage stage = (Stage) buttonConnect.getScene().getWindow();
+        stage.setOnCloseRequest(e -> App.closeApp());
         stage.setScene(scene);
         stage.show();
 
@@ -111,4 +111,5 @@ public class ControllerConnect {
     public void initialize() {
 
     }
+
 }

@@ -7,14 +7,13 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.TextAlignment;
-import org.example.chat.client.Message;
+import org.example.chat.client.message.Message;
 
 public class ChatLayout {
 
     private static void setStyleLabelMessage (Label labelMessage, Label labelTime, boolean isYouSender) {
         if(isYouSender) {
             labelMessage.getStyleClass().add("label-message");
-            labelTime.setStyle("-fx-background-color: red");
             labelTime.setTextAlignment(TextAlignment.RIGHT);
         } else {
             labelMessage.getStyleClass().add("label-message-other");

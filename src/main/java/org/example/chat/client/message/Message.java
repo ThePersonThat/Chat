@@ -1,4 +1,4 @@
-package org.example.chat.client;
+package org.example.chat.client.message;
 
 import javafx.scene.control.Label;
 

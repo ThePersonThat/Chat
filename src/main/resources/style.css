@@ -106,7 +106,7 @@
 
 .label-time {
     -fx-backround-color: transparent;
-    -fx-font-size: 12;
+    -fx-font-size: 13;
 }
 
 .label-message-other {
@@ -123,4 +123,19 @@
 
 .avatar-icon .decoration {
     -fx-stroke: #A5A0A0;
+}
+
+.vbox-choose {
+    -fx-background-color: silver;
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;	
+}
+
+.vbox-chose-label {
+    -fx-background-radius: 10 10 0 0;
+    -fx-border-radius: 10 10 0 0;	
+}
+
+.vbox-chose-label:hover {
+    -fx-background-color: gray;
 }
