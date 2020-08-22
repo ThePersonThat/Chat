@@ -1,7 +1,7 @@
 #dir
-.idea/
-out/
-target/
+/.idea
+/out
+/target
 
 # Compiled class file
 *.class
