@@ -1,6 +1,7 @@
 package org.example.chat.server.database;
 
 import org.example.chat.client.message.Message;
+import org.example.chat.client.message.MessageFile;
 import org.example.chat.client.message.MessageImage;
 import org.example.chat.client.message.MessageText;
 import org.example.chat.server.StoryMessage;
@@ -69,6 +70,10 @@ public class SQLQuery {
                         break;
                     case "image":
                         message = new MessageImage();
+                        setMessage(message, set, FILE);
+                        break;
+                    case "file":
+                        message = new MessageFile();
                         setMessage(message, set, FILE);
                         break;
                     default:

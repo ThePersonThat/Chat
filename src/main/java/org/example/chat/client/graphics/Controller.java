@@ -22,7 +22,7 @@ import org.example.chat.client.message.*;
 // TODO: 2) Correct displaying time, sendMessageSelf;
 // TODO: 3) It might be better if change label with image;
 // TODO: 4) Proportional size of image;
-// TODO: 5) Add storage to a server;
+// TODO: 5) Add loading data during scrolling
 
 
 public class Controller {
