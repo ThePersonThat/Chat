@@ -81,8 +81,7 @@ public class Controller {
         while (!isSendMessage) {
             Thread.onSpinWait();
         }
-
-        Platform.runLater(() -> setMessageSelf(message));
+        
         isSendMessage = false;
         return message;
     }
@@ -92,7 +91,6 @@ public class Controller {
     }
 
     public void sendFile(MouseEvent event) {
-
         vboxChooser.setVisible(true);
     }
 
@@ -168,6 +166,7 @@ public class Controller {
             }
         }
 
+        setMessageSelf(message);
         isSendMessage = true;
     }
 

@@ -8,11 +8,9 @@ import java.io.ByteArrayInputStream;
 
 public class MessageImage extends Message {
 
-    private byte[] image;
-
     @Override
     public void setContent(byte[] arrayContent) {
-        image = arrayContent;
+        byteArray = arrayContent;
     }
 
     @Override
@@ -20,7 +18,7 @@ public class MessageImage extends Message {
         double height = 400;
         double width = 650;
 
-        ByteArrayInputStream stream = new ByteArrayInputStream(image);
+        ByteArrayInputStream stream = new ByteArrayInputStream(byteArray);
         Image image = new Image(stream);
         Label label = new Label();
 
@@ -36,5 +34,10 @@ public class MessageImage extends Message {
         label.setGraphic(view);
 
         return label;
+    }
+
+    @Override
+    public String getTypeMessage() {
+        return "image";
     }
 }

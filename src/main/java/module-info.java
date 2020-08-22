@@ -5,6 +5,7 @@ module org.example {
 
     requires de.jensd.fx.fontawesomefx.fontawesome;
     requires com.gluonhq.charm.glisten;
+    requires java.sql;
 
     exports org.example.chat.client.graphics.app;
 }

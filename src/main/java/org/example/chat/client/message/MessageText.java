@@ -13,12 +13,17 @@ public class MessageText extends Message {
     @Override
     public void setContent(byte[] arrayContent) {
         message = new String(arrayContent);
+        byteArray = arrayContent;
     }
 
     @Override
     public Label getLabelWithContent() {
-        Label label = new Label(message);
 
-        return label;
+        return new Label(message);
+    }
+
+    @Override
+    public String getTypeMessage() {
+        return "text";
     }
 }
