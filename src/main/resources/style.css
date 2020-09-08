@@ -139,3 +139,9 @@
 .vbox-chose-label:hover {
     -fx-background-color: gray;
 }
+
+.label_create_account { }
+
+.label_create_account:hover {
+    -fx-text-fill: blue;
+}

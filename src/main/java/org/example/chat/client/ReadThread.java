@@ -1,7 +1,7 @@
 package org.example.chat.client;
 
 import javafx.application.Platform;
-import org.example.chat.client.graphics.Controller;
+import org.example.chat.client.graphics.controllers.ControllerChat;
 import org.example.chat.client.message.Message;
 
 import java.io.*;
@@ -26,7 +26,7 @@ public class ReadThread extends Thread{
             ex.printStackTrace();
         }
 
-        Controller controller = client.getController();
+        ControllerChat controller = client.getController();
 
         while (true) {
             try {

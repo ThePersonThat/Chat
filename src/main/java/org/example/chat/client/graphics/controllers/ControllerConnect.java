@@ -1,4 +1,4 @@
-package org.example.chat.client.graphics;
+package org.example.chat.client.graphics.controllers;
 
 import java.io.IOException;
 import java.net.Socket;
@@ -6,9 +6,7 @@ import java.net.URL;
 import java.net.UnknownHostException;
 import java.util.ResourceBundle;
 
-import javafx.application.HostServices;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -16,13 +14,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import org.example.chat.client.Client;
 import org.example.chat.client.graphics.app.App;
 
-public class ControllerConnect {
-
-    private double x, y;
-
+public class ControllerConnect extends AbstractController {
     public ResourceBundle resources;
 
     public URL location;
@@ -33,26 +27,16 @@ public class ControllerConnect {
 
     public TextField port;
 
-
-    public void CloseApp(MouseEvent event) {
-        App.closeApp();
-    }
-
-    public void MinStage(MouseEvent event) {
-        ((Stage) ((Node) event.getSource()).getScene().getWindow()).setIconified(true);
-    }
-
-    private void loadChat(Socket socket) throws Exception {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/chat.fxml"));
+    private void loadLoginForm(Socket socket) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/login.fxml"));
         Parent root = loader.load();
-
+        ControllerLoginUp controller = loader.getController();
+        controller.setSocket(socket);
         Scene scene = new Scene(root);
         Stage stage = (Stage) buttonConnect.getScene().getWindow();
         stage.setOnCloseRequest(e -> App.closeApp());
         stage.setScene(scene);
         stage.show();
-
-        Client.run(loader.getController(), socket);
     }
 
     public void connect(MouseEvent event) {
@@ -73,7 +57,7 @@ public class ControllerConnect {
         try {
             int port = Integer.parseInt(pt);
             Socket socket = new Socket(ht, port);
-            loadChat(socket);
+            loadLoginForm(socket);
         } catch (NumberFormatException ex) {
             alert.setHeaderText(null);
             alert.setContentText("Port only can have numbers");
@@ -86,8 +70,7 @@ public class ControllerConnect {
             alert.showAndWait();
         } catch (IOException ex) {
             alert.setHeaderText(null);
-            alert.setContentText("Error during connection!");
-
+            alert.setContentText("Error during connection: " + ex.getMessage());
             alert.showAndWait();
         } catch (Exception ex) {
             alert.setHeaderText(null);
@@ -95,21 +78,9 @@ public class ControllerConnect {
         }
     }
 
-    public void dragged(MouseEvent event) {
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setX(event.getScreenX() - x);
-        stage.setY(event.getScreenY() - y);
-    }
-
-
-    public void pressed(MouseEvent event) {
-        x = event.getSceneX();
-        y = event.getSceneY();
-    }
 
 
     public void initialize() {
 
     }
-
 }

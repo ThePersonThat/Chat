@@ -6,7 +6,7 @@ import javafx.scene.image.ImageView;
 
 import java.io.ByteArrayInputStream;
 
-public class MessageImage extends Message {
+public class MessageImage extends AbstractMessageFile {
 
     @Override
     public void setContent(byte[] arrayContent) {

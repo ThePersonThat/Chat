@@ -9,25 +9,16 @@ import org.example.chat.client.graphics.app.App;
 import java.io.*;
 
 
-
-public class MessageFile extends Message {
-
-    private String name;
-    private String extension;
+public class MessageFile extends AbstractMessageFile {
 
     @Override
     public void setContent(byte[] arrayContent) {
         byteArray = arrayContent;
     }
 
-    public void setNameFile(String fileName) {
-        name = FileName.getNameWithoutExtension(fileName);
-        extension = FileName.getFileExtension(fileName);
-    }
-
     @Override
     public Label getLabelWithContent() {
-        Label label = new Label(name + extension);
+        Label label = new Label(filename + extension);
 
         FontAwesomeIcon icon = FontAwesomeIcon.ARROW_CIRCLE_ALT_DOWN;
         FontAwesomeIconView view = new FontAwesomeIconView(icon);
@@ -36,15 +27,19 @@ public class MessageFile extends Message {
         view.setCursor(Cursor.HAND);
 
         view.setOnMouseClicked(e -> {
-            try {
-                File tempFile = File.createTempFile(name, extension);
+            /*try {
+                File tempFile = File.createTempFile(filename, extension);
                 FileOutputStream fos = new FileOutputStream(tempFile);
                 fos.write(byteArray);
 
                 App.getServices().showDocument(tempFile.toURI().toString());
             } catch (IOException exception) {
                 exception.printStackTrace();
-            }
+            }*/
+
+            /*
+                There must be open browser and download file
+            */
         });
 
         label.setGraphic(view);

@@ -1,6 +1,6 @@
 package org.example.chat.client;
 
-import org.example.chat.client.graphics.Controller;
+import org.example.chat.client.graphics.controllers.ControllerChat;
 import org.example.chat.client.message.Message;
 
 import java.io.IOException;
@@ -26,7 +26,7 @@ public class WriteThread extends Thread {
 
     @Override
     public void run() {
-        Controller controller = client.getController();
+        ControllerChat controller = client.getController();
         Message message;
 
         try {

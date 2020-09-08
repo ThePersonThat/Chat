@@ -1,4 +1,4 @@
-package org.example.chat.client.graphics;
+package org.example.chat.client.graphics.controllers;
 
 import java.io.File;
 import java.io.IOException;
@@ -6,8 +6,6 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.util.ResourceBundle;
 
-import javafx.application.Platform;
-import javafx.scene.Node;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
@@ -15,7 +13,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
-import javafx.stage.Stage;
+import org.example.chat.client.graphics.ChatLayout;
 import org.example.chat.client.message.*;
 
 // TODO: 1) Scroll bar on hover;
@@ -25,11 +23,10 @@ import org.example.chat.client.message.*;
 // TODO: 5) Add loading data during scrolling
 
 
-public class Controller {
+public class ControllerChat extends AbstractController {
 
     private volatile Message message;
     private volatile boolean isSendMessage = false;
-    private double x, y;
 
     public ResourceBundle resources;
     public URL location;
@@ -50,26 +47,6 @@ public class Controller {
         scrollPane.vvalueProperty().bind(chatBox.heightProperty());
     }
 
-
-    public void CloseApp(MouseEvent event) {
-        Platform.exit();
-        System.exit(0);
-    }
-
-    public void pressed(MouseEvent event) {
-        x = event.getSceneX();
-        y = event.getSceneY();
-    }
-
-    public void MinStage(MouseEvent event) {
-        ((Stage) ((Node) event.getSource()).getScene().getWindow()).setIconified(true);
-    }
-
-    public void dragged(MouseEvent event) {
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setX(event.getScreenX() - x);
-        stage.setY(event.getScreenY() - y);
-    }
 
     public void checkKey(KeyEvent event) {
         if(event.getCode() == KeyCode.ENTER) {
@@ -135,6 +112,7 @@ public class Controller {
 
                 try {
                     message = new MessageImage();
+                    ((AbstractMessageFile)message).setFilename(file.getName());
                     byte[] array = Files.readAllBytes(file.toPath());
                     message.setContent(array);
                 } catch (IOException exception) {
@@ -156,7 +134,7 @@ public class Controller {
                 try {
                     message = new MessageFile();
                     byte[] array = Files.readAllBytes(file.toPath());
-                    ((MessageFile)message).setNameFile(file.getName());
+                    ((AbstractMessageFile)message).setFilename(file.getName());
                     message.setContent(array);
                 } catch (IOException exception) {
                     exception.printStackTrace();

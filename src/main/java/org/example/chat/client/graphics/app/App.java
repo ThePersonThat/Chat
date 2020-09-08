@@ -8,7 +8,6 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.StageStyle;
-import org.example.chat.client.graphics.ControllerConnect;
 
 /**
  * JavaFX App

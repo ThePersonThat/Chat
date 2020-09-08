@@ -1,23 +1,23 @@
 package org.example.chat.client;
 
 
-import org.example.chat.client.graphics.Controller;
+import org.example.chat.client.graphics.controllers.ControllerChat;
 import java.net.Socket;
 
 public class Client {
-    private Controller controller;
+    private ControllerChat controller;
     private Socket socket;
 
-    public Client(Socket socket, Controller controller) {
+    public Client(Socket socket, ControllerChat controller) {
         this.socket = socket;
         this.controller = controller;
     }
 
-    public Controller getController() {
+    public ControllerChat getController() {
         return controller;
     }
 
-    public static void run(Controller controller, Socket socket) {
+    public static void run(ControllerChat controller, Socket socket) {
         try {
             Client client = new Client(socket, controller);
 

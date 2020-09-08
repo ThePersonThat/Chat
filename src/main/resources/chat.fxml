@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="645.0" prefWidth="920.0" styleClass="background" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.chat.client.graphics.Controller">
+<AnchorPane prefHeight="645.0" prefWidth="920.0" styleClass="background" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.chat.client.graphics.controllers.ControllerChat">
    <children>
       <TextField fx:id="input" layoutX="64.0" layoutY="572.0" onKeyPressed="#checkKey" prefHeight="39.0" prefWidth="764.0" style="-fx-border-color: transparent;" styleClass="input-area" stylesheets="@style.css">
          <cursor>
